@@ -18,6 +18,10 @@ export default function SideNav() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
+        <div className="hidden h-[48px] w-full items-center justify-start gap-2  rounded-md bg-gray-50 p-3 text-sm font-medium md:flex md:p-2 md:px-3">
+          <PowerIcon className="w-6" />
+          <div>Hello Anouk</div>
+        </div>
         <form
           action={async () => {
             "use server";
