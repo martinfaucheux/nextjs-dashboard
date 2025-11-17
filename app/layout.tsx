@@ -1,6 +1,6 @@
 import "@/app/ui/global.css";
 import { inter } from "@/app/ui/fonts";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
   title: {
@@ -9,8 +9,6 @@ export const metadata: Metadata = {
   },
   description: "The official Next.js Learn Dashboard built with App Router.",
   metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#0070f3",
   icons: {
     icon: [
       { url: "/favicons/web-app-manifest-192x192.png", sizes: "192x192" },
@@ -27,6 +25,12 @@ export const metadata: Metadata = {
       url: "https://github.com/martinfaucheux",
     },
   ],
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0070f3",
 };
 
 export default function RootLayout({
