@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   },
   description: "The official Next.js Learn Dashboard built with App Router.",
   metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
+  icons: {
+    icon: [
+      { url: "/favicons/web-app-manifest-192x192.png", sizes: "192x192" },
+      { url: "/favicons/web-app-manifest-512x512.png", sizes: "512x512" },
+    ],
+    apple: "/favicons/web-app-manifest-192x192.png",
+  },
 };
 
 export default function RootLayout({
