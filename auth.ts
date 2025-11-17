@@ -21,9 +21,17 @@ async function getUser(email: string): Promise<User | undefined> {
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   secret: "MFleHIgWFxjrd0RtSel9rX7geWZHaCJcKFy8JhrNyO8=",
+  debug: process.env.NODE_ENV === "development",
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     Credentials({
       async authorize(credentials) {
+        console.log("🔍 Authorize called with credentials:", {
+          email: credentials?.email,
+        });
+
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials);
@@ -31,13 +39,27 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
           const user = await getUser(email);
-          if (!user) return null;
+
+          if (!user) {
+            console.log("❌ User not found:", email);
+            return null;
+          }
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
-          if (passwordsMatch) return user;
+          if (passwordsMatch) {
+            console.log("✅ User authenticated successfully:", {
+              id: user.id,
+              email: user.email,
+            });
+            return {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+            };
+          }
         }
 
-        console.log("Invalid credentials");
+        console.log("❌ Invalid credentials for:", credentials?.email);
         return null;
       },
     }),
