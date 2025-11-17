@@ -8,6 +8,27 @@ import postgres from "postgres";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
 
+// Automatically construct AUTH_URL from Vercel system environment variables
+function getAuthUrl() {
+  // In development, use localhost
+  if (process.env.NODE_ENV === "development") {
+    return "http://localhost:3000/api/auth";
+  }
+
+  // In production on Vercel, use the system environment variable
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/api/auth`;
+  }
+
+  // Fallback for other environments
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}/api/auth`;
+  }
+
+  // Final fallback
+  return "http://localhost:3000/api/auth";
+}
+
 async function getUser(email: string): Promise<User | undefined> {
   try {
     const user = await sql<User[]>`SELECT * FROM users WHERE email=${email}`;
@@ -25,6 +46,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: "jwt",
   },
+  trustHost: true, // Enable trust host for Vercel deployments
   providers: [
     Credentials({
       async authorize(credentials) {
