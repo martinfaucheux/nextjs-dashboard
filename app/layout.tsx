@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   description: "The official Next.js Learn Dashboard built with App Router.",
   metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
+  viewport: "width=device-width, initial-scale=1",
+  themeColor: "#0070f3",
   icons: {
     icon: [
       { url: "/favicons/web-app-manifest-192x192.png", sizes: "192x192" },
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
     apple: "/favicons/web-app-manifest-192x192.png",
   },
   generator: "Next.js",
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
   keywords: ["nextjs", "next14", "pwa", "next-pwa"],
   authors: [
     {
