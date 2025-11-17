@@ -14,6 +14,7 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["business", "productivity"],
     scope: "/",
     lang: "en",
+    id: "/",
     icons: [
       {
         src: "/favicons/web-app-manifest-192x192.png",

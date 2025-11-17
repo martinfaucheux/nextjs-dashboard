@@ -9,4 +9,8 @@ const nextConfig: NextConfig = {
 export default withPWA({
   dest: "public",
   register: true,
+  skipWaiting: true,
+  workboxOptions: {
+    disableDevLogs: true,
+  },
 })(nextConfig);

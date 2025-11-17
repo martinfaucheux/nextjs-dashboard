@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     apple: "/favicons/web-app-manifest-192x192.png",
   },
   generator: "Next.js",
-  manifest: "/manifest.webmanifest",
+  manifest: "/manifest.json",
   keywords: ["nextjs", "next14", "pwa", "next-pwa"],
   authors: [
     {
